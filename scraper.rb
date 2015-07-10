@@ -8,6 +8,13 @@ url = "https://www.airbnb.ca/s/Cartagena-~-Bolivar--Colombia"
 # Parse the page with nokogiri
 page = Nokogiri::HTML(open(url))
 
+page_numbers = []
+page.css("div.pagination ul li a[target]").each do |element|
+  page_numbers << element
+end
+
+puts page_numbers
+
 # Store data in arrays
 name = []
 price = []
@@ -35,11 +42,11 @@ end
 
 # puts page.css('div.text-muted.listing-location.text-truncate')
 
-# Write data to csv file
-CSV.open("airbnb_listing.csv", "w") do |file|
-  file << ["Listing Name", "Price", "Room", "Reviews"]
+# # Write data to csv file
+# CSV.open("airbnb_listing.csv", "w") do |file|
+#   file << ["Listing Name", "Price", "Room", "Reviews"]
 
-  name.length.times do |i|
-    file << [name[i], price[i], details[i][0], details[i][1]]
-  end
-end 
+#   name.length.times do |i|
+#     file << [name[i], price[i], details[i][0], details[i][1]]
+#   end
+# end 
