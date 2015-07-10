@@ -22,8 +22,11 @@ page.css('span.h3.price-amount').each do |cost|
 end
 
 page.css('div.text-muted.listing-location.text-truncate').each do |detail|
-  details << detail.text.strip
+  details << detail.text.gsub(/\s/, ' ').squeeze(' ').strip.split(/ · /)
 end
+
+
+# puts page.css('div.text-muted.listing-location.text-truncate')
 
 # Write data to csv file
 CSV.open("airbnb_listing.csv", "w") do |file|
@@ -33,5 +36,3 @@ CSV.open("airbnb_listing.csv", "w") do |file|
     file << [name[i], price[i], details[i]]
   end
 end 
-
-puts page.css('div.text-muted.listing-location.text-truncate')
