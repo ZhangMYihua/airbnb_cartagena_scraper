@@ -27,9 +27,9 @@ end
 
 details.length.times do |n|
   if details[n][1]
-    details[n][1] = details[n][1].strip(/·/, '').strip
+    details[n][1] = details[n][1].gsub(/· /, '').strip
   else
-    details[i] << "No reviews"
+    details[n] << "No reviews"
   end
 end
 
