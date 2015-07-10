@@ -33,7 +33,7 @@ max_page.times do |n|
   end
 
   page.css('span.h3.price-amount').each do |cost|
-    price << cost.text
+    price << "$#{cost.text}"
   end
 
   page.css('div.text-muted.listing-location.text-truncate').each do |detail|
