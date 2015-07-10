@@ -5,10 +5,10 @@ require 'csv'
 # Store URL to be scraped
 url = "https://www.airbnb.ca/s/Cartagena-~-Bolivar--Colombia"
 
-#parse the page with nokogiri
+# Parse the page with nokogiri
 page = Nokogiri::HTML(open(url))
 
-# store data in arrays
+# Store data in arrays
 name = []
 price = []
 
@@ -20,3 +20,9 @@ page.css('span.h3.price-amount').each do |cost|
   price << cost.text
 end
 
+# Write data to csv file
+CSV.open("airbnb_listing.csv", "w") do |file|
+  name.length.times do |i|
+    file << [name[1], price[i]]
+  end
+end 
